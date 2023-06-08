@@ -18,6 +18,7 @@
 	// id != null && id.equals("abc");  = 다른 방법
 	
 	if("abc".equalsIgnoreCase (id) && "123".equalsIgnoreCase(pw)){
+		
 
 		out.print("로그인성공");
 		response.sendRedirect("login.jsp?name="+id);

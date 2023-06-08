@@ -29,7 +29,7 @@
 
             <aside id='rightside'>
                 <div class='side1'>
-                	<!--  로그인 : method를 post로 설정해서 아이디/비번이 노출되는걸 막아줍니다 -->
+                	<!-- 로그인 성공 : 박스를 보여주지 않음 / abc님 환영합니다 -->
                 	<!-- 로그인 실패 : 메세지 처리 -->
                 		<%
 						   	String loginErr = request.getParameter("loginErr");
@@ -37,14 +37,25 @@
 						   		out.print("<script>alert('아이디/비밀번호를 확인해주세요!')</script>");
 						   	}
 						   	%>
-                	<!-- 로그인 성공 : 박스를 보여주지 않음 / abc님 환영합니다 -->
+                	<!--  로그인 : method를 post로 설정해서 아이디/비번이 노출되는걸 막아줍니다 -->
                 	
                 		<%
-					   	
-					   String name = request.getParameter("name");
+					   	String name = "";
+                	   if(session.getAttribute("id") != null){
+                		   name = (String)session.getAttribute("id");
+                	   }
+                	   
+					   // String name = request.getParameter("name");
+                		
                 		if(name != null && !name.equals("")){
                 			// 로그인 되었다고 판단
-                			out.print(name+"님 환영합니다.");
+                			//out.print(name+"님 환영합니다.");
+                		%>
+                		
+                			<%= name + "님 환영합니다."%>
+                			<button onclick="location.href='logout.jsp'">로그아웃</button>
+                		<%
+                		
                 		}else{
    						%>
 		<form action="goLogin.jsp" method="post">

@@ -27,6 +27,18 @@
 		out.print("로그인 실패");
 		response.sendRedirect("ResponseMain.jsp?loginErr=Y");
 	}
+	
+	
+	
+	// 로그인 실패
+	out.print("로그인 실패");
+	response.sendRedirect("ResponseMain.jsp?loginErr=Y");
+	
+	// 사용자로부터 전달받은 request객체가 공유 되므로
+	// 아이디를 바로출력할 수 있다( redirect시 null출력)
+	RequestDispatcher rd = request.getRequestDispatcher("ResponseMain.jsp");
+	rd.forward(request,response);
+	
 %>
 </body>
 </html>
