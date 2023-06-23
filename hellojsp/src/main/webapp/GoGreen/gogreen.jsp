@@ -1,3 +1,4 @@
+<%@page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,6 +33,11 @@
                 	<!-- 로그인 성공 : 박스를 보여주지 않음 / abc님 환영합니다 -->
                 	<!-- 로그인 실패 : 메세지 처리 -->
                 		<%
+                			// 쿠키에 저장된 아이디가 있다면 아이디를 텍스트필드에 value값으로 출력
+                			String userId = CookieManager.readCookie(request, "userId");
+                			
+                			
+                			
 						   	String loginErr = request.getParameter("loginErr");
 						   	if("Y".equals(loginErr)){
 						   		out.print("<script>alert('아이디/비밀번호를 확인해주세요!')</script>");
@@ -61,7 +67,8 @@
 		<form action="goLogin.jsp" method="post">
                     <div class='loginbox'>
                         <div id='login'>
-                            <input type="text" name="userid" id="userpw" placeholder='ID를 입력해주세요.'>
+                            <input type="text" name="userid" id="userpw" placeholder='ID를 입력해주세요.'
+                            			value = "<%=userId%>">
                             <input type="password" name="userpw" id="userpw" placeholder='PW를 입력해주세요.'>
                         </div>
                         <div id='button'>
@@ -69,6 +76,10 @@
                         </div>
                     </div>
                     <div id='info'>
+                    	<!--  선택되었을때 서버에 넘어갑니다!
+                    			선택안하고 값을 출력하면 null출력됨! -->
+                    	<input type="checkbox" name="save_check" value="Y" <%=!userId.equals("") ? "checked" : "" %>>
+                    	아이디 저장하기<br>
                         <a href="">회원가입</a>
                         <a href="">ID찾기</a>
                         <a href="">PW찾기</a>

@@ -1,3 +1,4 @@
+<%@page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,11 +11,15 @@
 <%
 	String id = request.getParameter("userid");
 	String pw = request.getParameter("userpw");
+	String saveCheck = request.getParameter("saveCheck");
 	
+	//out.print("saveCheck : " +saveCheck);
+	// 체크박스가 체크되었을경우, 아이디를 쿠키에 저장합니다.
+	if(saveCheck != null && saveCheck.equals("Y")){
+		//out.print("쿠키생성");
+		CookieManager.makeCookie(response, "userId", id, 60*60*24*7);
+	}
 	
-	
-	// 아이디가 abc, 비밀번호가 123 이면 로그인 성공
-	// id != null && id.equals("abc");  = 다른 방법
 	
 	if("abc".equalsIgnoreCase (id) && "123".equalsIgnoreCase(pw)){
 		// 로그인 성공
